@@ -18,6 +18,14 @@ const [user, setUser] = useState('')
         handleUsers()
 
     }
+
+    const handleDelete=(id)=>{
+        fetch(`api/users/${id}`,{
+            method: 'DELETE',
+        } 
+        )
+        handleUsers()
+    }
     return (
         <div>
             <div>
@@ -30,6 +38,7 @@ const [user, setUser] = useState('')
                     return(
                         <div>
                             <h2>{SingleUser.name}</h2>
+                            <button onClick={()=> handleDelete(user.id)}>Delete</button>
                         </div>
                 )
                 })
