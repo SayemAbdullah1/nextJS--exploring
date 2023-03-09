@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 
 const PostList = ({data}) => {
@@ -9,7 +10,9 @@ const PostList = ({data}) => {
             data.map((post)=> {
                 return(
                     <div key={post.id}>
-                        <h1>{post.title}</h1>
+                        <Link href={`/blog/${post.id}`} passHref>
+                            <h1>{post.title}</h1>
+                        </Link>
                         <p>{post.body}</p>
                         <hr />
                     </div>
