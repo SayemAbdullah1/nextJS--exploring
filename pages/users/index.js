@@ -1,17 +1,32 @@
 import React, { useState } from 'react';
 
 const users = () => {
-const [user, setUser] = useState([])
+const [users, setUsers] = useState([])
+const [user, setUser] = useState('')
+
     const handleUsers = ()=>{
         fetch('api/users')
         .then(res=> res.json())
-        .then(data => setUser(data))
+        .then(data => setUsers(data))
+    }
+    const handleAdduser= ()=>{
+        fetch('api/users', {
+            method: "POST",
+            body: JSON.stringify({user}),
+            headers: {"content-type": "application/json"},
+        })
+        handleUsers()
+
     }
     return (
         <div>
+            <div>
+                <input type="text" onChange={(e)=> setUser(e.target.value)} />
+                <button onClick={handleAdduser}>Add new user</button>
+            </div>
             <h2>All users</h2> <hr />
             {
-                user.map(SingleUser => {
+                users.map(SingleUser => {
                     return(
                         <div>
                             <h2>{SingleUser.name}</h2>
